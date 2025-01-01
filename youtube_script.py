@@ -1,25 +1,31 @@
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
-import os, base64, json
+import os
 
 # setup API key
+load_dotenv()
 api_key = os.getenv('YOUTUBE_API_KEY')
 
 # Initialize the Youtube API
 youtube = build('youtube', 'v3', developerKey=api_key)
 
-# Check example
-# Checking top5 popular videos
-request = youtube.videos().list(
-    part="snippet,contentDetails,statistics",
-    chart="mostPopular",
-    regionCode="US",
-    maxResults=5
-)
-response = request.execute()
 
-# Response 
-for item in response['items']:
-    print(f"title: {item['snippet']['title']}")
-    print(f"Views: {item['statistics']['viewCount']}")
-    print()
+# Search song video
+def search_video(query, max_results = 5):
+    request = youtube.search().list(
+        part="snippet",
+        q=query,
+        type="video",
+        maxResults=max_results
+    )
+    response = request.execute()
+    return response
+
+# Get the video link
+def video_link(video_id):
+    return f"https://www.youtube.com/watch?v={video_id}"
+
+response = search_video("music name - artist name")
+video_id = response['items'][0]['id']['videoId']
+
+print(video_link(video_id))
