@@ -1,13 +1,32 @@
 from mutagen.easyid3 import EasyID3
 import mutagen
+import requests, os
+from mutagen.mp3 import MP3
+from mutagen.id3 import ID3, APIC
 
-def change_metadata(file_path, title=None, artist=None, album=None, genre=None, album_artist=None, year=None):
+# Save the image
+def save_image_from_url(url, file_name):
+    # Send a GET request to the URL to retrieve the image
+    response = requests.get(url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Open a local file in binary write mode and save the image
+        with open(file_name, 'wb') as file:
+            file.write(response.content)
+        print(f"Image saved as {file_name}")
+    else:
+        print(f"Failed to retrieve the image. Status code: {response.status_code}")
+
+# Changing the metadata
+def change_metadata(file_path, title = None,artist = None,album = None,genre = None,album_artist = None,year = None):
     try:
         audio = EasyID3(file_path)
     except mutagen.id3.ID3NoHeaderError:
         audio = mutagen.File(file_path, easy=True)
         audio.add_tags()
 
+    # Update text metadata
     if title:
         audio['title'] = title
     if artist:
@@ -20,9 +39,47 @@ def change_metadata(file_path, title=None, artist=None, album=None, genre=None, 
         audio['albumartist'] = album_artist
     if year:
         audio['date'] = year
+    print("Metadata changed successfully")
 
     audio.save()
 
+# Change cover image
+def cover_image(audio_file, image_file):
+    audio = MP3(audio_file, ID3 = ID3)
+    with open(image_file, "rb") as img_file:
+        img_data = img_file.read()
+
+    audio.tags.add(APIC(
+        encoding=3,  # 3 = UTF-8
+        mime='image/jpg',  # MIME type of the image
+        type=3,  # Type 3 = album art
+        desc='Cover',
+        data=img_data
+    ))
+    print("Changed value")
+    audio.save()
+
+# Delete the image file
+def delete_image(file_name):
+    # Check if the file exists before attempting to delete
+    if os.path.exists(file_name):
+        os.remove(file_name)  # Delete the file
+        print(f"File {file_name} has been deleted.")
+    else:
+        print(f"The file {file_name} does not exist.")
+
 if __name__ == "__main__":
-    file_path = "downloads/output2.mp3"
-    change_metadata(file_path, title="APT.", artist="ROSE, Bruno Mars", album="APT.", genre="Chill", album_artist="ROSE", year="2024")
+    # Download the image
+    image_url = "image_url"
+    local_file_name = "downloaded_image.jpg"
+    save_image_from_url(image_url, local_file_name)
+
+    # Change text metadata
+    file_path = "downloads/output.mp3"
+    change_metadata(file_path)
+
+    # Change the cover image
+    cover_image(file_path, local_file_name)
+
+    # delete image
+    delete_image(local_file_name)
