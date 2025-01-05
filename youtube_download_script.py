@@ -23,4 +23,4 @@ def download_audio_from_youtube(url, output_path):
         ydl.download([url])
 
 # Example usage:
-download_audio_from_youtube('video-link', 'downloads/output1.mp3')
+download_audio_from_youtube('video-link', 'downloads/output')

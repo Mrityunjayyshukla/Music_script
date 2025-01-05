@@ -56,4 +56,7 @@ for i in range(no_of_result):
     print(f"Album Name: {result[i]['album']['name']}")
     print(f"Artist Name: {result[i]['artists'][0]['name']}")
     print(f"Song ID: {result[i]['external_urls']['spotify']}")
+    print(f"Song Year: {result[i]['album']['release_date'][0:4]}")
+    print(f"AlbumType: {result[i]['album']['album_type']}")
+    print(f"Cover Image: {result[i]['album']['images'][0]['url']}")
     print()
