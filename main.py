@@ -28,12 +28,13 @@ for i in range(len(song_result)):
     print(f"Song Name: {song_result[i][0]} and artist name: {song_result[i][2]}")
 
 choice = int(input("Which song to choose: "))
-if choice == 1:
-    song_name, song_album, song_artist, song_ID, songYear, albumType, coverImage = song_result[choice-1]
+if choice > no_of_res:
+    print("Error: Choice invalid")
+song_name, song_album, song_artist, song_ID, songYear, albumType, coverImage = song_result[choice-1]
 
 
 # Getting the youtube URL from the youtube API
-youtube_response = search_video(f"{song_name} - {song_artist}")
+youtube_response = search_video(f"{song_name} - {song_artist} Official Audio")
 video_id = youtube_response['items'][0]['id']['videoId']
 
 youtube_link = video_link(video_id)
