@@ -67,19 +67,3 @@ def delete_image(file_name):
         print(f"File {file_name} has been deleted.")
     else:
         print(f"The file {file_name} does not exist.")
-
-if __name__ == "__main__":
-    # Download the image
-    image_url = "image_url"
-    local_file_name = "downloaded_image.jpg"
-    save_image_from_url(image_url, local_file_name)
-
-    # Change text metadata
-    file_path = "downloads/output.mp3"
-    change_metadata(file_path)
-
-    # Change the cover image
-    cover_image(file_path, local_file_name)
-
-    # delete image
-    delete_image(local_file_name)

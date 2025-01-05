@@ -45,18 +45,3 @@ def search_song(token, song_name, no_of_result):
     json_result = json.loads(result.content)['tracks']['items']
     return "No result found" if len(json_result) == 0 else json_result
 
-
-token = get_token()
-song_name = input("Enter the name of the song: ")
-no_of_result = 3
-result = search_song(token, song_name, no_of_result)
-
-for i in range(no_of_result):
-    print(f"Song Name: {result[i]['name']}")
-    print(f"Album Name: {result[i]['album']['name']}")
-    print(f"Artist Name: {result[i]['artists'][0]['name']}")
-    print(f"Song ID: {result[i]['external_urls']['spotify']}")
-    print(f"Song Year: {result[i]['album']['release_date'][0:4]}")
-    print(f"AlbumType: {result[i]['album']['album_type']}")
-    print(f"Cover Image: {result[i]['album']['images'][0]['url']}")
-    print()
