@@ -1,3 +1,4 @@
 .env
 script_venv/
 streamlit_check.py
+streamlit_spotify.py
