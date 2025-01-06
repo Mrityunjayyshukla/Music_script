@@ -1,6 +1,8 @@
 import yt_dlp as youtube_dl 
 import os
+import streamlit as st
 
+@st.cache_data
 def download_audio_from_youtube(url, output_path):
     # Ensure the output directory exists
     output_dir = os.path.dirname(output_path)

@@ -3,8 +3,10 @@ import mutagen
 import requests, os
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, APIC
+import streamlit as st
 
 # Save the image
+@st.cache_data
 def save_image_from_url(url, file_name):
     # Send a GET request to the URL to retrieve the image
     response = requests.get(url)
@@ -19,6 +21,7 @@ def save_image_from_url(url, file_name):
         print(f"Failed to retrieve the image. Status code: {response.status_code}")
 
 # Changing the metadata
+@st.cache_data
 def change_metadata(file_path, title = None,artist = None,album = None,genre = None,album_artist = None,year = None):
     try:
         audio = EasyID3(file_path)
@@ -44,6 +47,7 @@ def change_metadata(file_path, title = None,artist = None,album = None,genre = N
     audio.save()
 
 # Change cover image
+@st.cache_data
 def cover_image(audio_file, image_file):
     audio = MP3(audio_file, ID3 = ID3)
     with open(image_file, "rb") as img_file:
@@ -60,6 +64,7 @@ def cover_image(audio_file, image_file):
     audio.save()
 
 # Delete the image file
+@st.cache_data
 def delete_image(file_name):
     # Check if the file exists before attempting to delete
     if os.path.exists(file_name):
