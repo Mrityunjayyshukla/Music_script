@@ -24,35 +24,8 @@ For the processing of the audio files, the program uses **FFmpeg**. So FFmpeg ha
 - **YouTube API**: To search the song on YouTube and return video link of the song
 
 ## Installation
-### Steps to install FFmpeg
-- **Download FFmpeg**
-  
-Visit the official FFmpeg website: https://ffmpeg.org/download.html<br>
-- **Choose the Windows build:**
-
-`Windows -> Windows builds by BtbN`<br>
-Download the "ffmpeg-release" zip file, typically labeled as ffmpeg-release-i686 or ffmpeg-release-x86_64, depending on whether you're using 32-bit or 64-bit Windows<br>
-- **Extract FFmpeg**<br>
-
-After downloading the zip file, right-click on it and select Extract All.<br>
-Choose a location where you'd like to extract the files, such as C:\ffmpeg\ or C:\Program Files\ffmpeg\.<br>
-Inside the extracted folder, you should see a folder named bin. This folder contains the executable files for FFmpeg (ffmpeg.exe, ffprop.exe, etc.).<br>
-- **Add FFmpeg to System Path**
-  
-To run FFmpeg from any command prompt window without navigating to the folder each time, you'll need to add its location to the system PATH.<br>
-Open the folder where you extracted FFmpeg, and inside the bin directory, copy the path to the bin folder (e.g., C:\ffmpeg\bin).<br>
-Right-click on the Start button and select System.<br>
-`System -> Advanced System Settings -> Environment Variables -> Path (edit)`<br>
-In the Edit Environment Variable window, click New, then paste the path you copied earlier (C:\ffmpeg\bin).<br>
-Click OK to close all the windows.<br>
-- **Verify FFmpeg Installation**<br>
-
-Check FFmpeg version:<br>
-```bash
-ffmpeg -version
-```
-in the command prompt
-If FFmpeg was installed correctly, you should see details about the version of FFmpeg you installed.<br>
+### Installing FFmpeg
+[Installing FFmpeg](https://github.com/Mrityunjayyshukla/Music_script/tree/main)
 
 ### Cloning the Repository
 ```bash
