@@ -25,7 +25,8 @@ For the processing of the audio files, the program uses **FFmpeg**. So FFmpeg ha
 
 ## Installation
 ### Installing FFmpeg
-[Installing FFmpeg](https://github.com/Mrityunjayyshukla/Music_script/tree/main)
+Here are the steps to install FFmpeg in your system
+[Installing FFmpeg](https://github.com/Mrityunjayyshukla/Music_script/blob/main/ffmpeg_install.md)
 
 ### Cloning the Repository
 ```bash
